@@ -13,7 +13,7 @@ function main() {
 function checking(arr) {
   // 숫자 중복이 있는지 없는지 확인, 1~9 중 숫자 고르기, 숫자는 3개만 고르기
   const newArr = arr.map((el) => Number(el));
-  const baseBallQuiz = [1, 3, 2];
+  const baseBallQuiz = randomNum();
   console.log(baseBallQuiz);
   console.log();
 
@@ -34,6 +34,13 @@ function checking(arr) {
 
       let ballCount = 0;
       let strikeCount = 0;
+      let countExcess = 0;
+
+      for (let el of newArr) {
+        if (el > 9 || el < 1) {
+          countExcess += 1;
+        }
+      }
 
       for (let j = 0; j < newArr.length; j++) {
         if (newArr[j] < 10 && newArr[j] >= 1) {
@@ -46,29 +53,21 @@ function checking(arr) {
           } else if (howManyBall) {
             ballCount += 1;
           }
-
-          // if (howManyBall) {
-          //   ballCount += 1;
-          //   console.log(`${ballCount} ball`);
-          // }
-        } else {
-          console.log('1 ~ 9 중에서 숫자를 골라주세요.');
-          break;
         }
       } // ball checking
 
-      if (strikeCount === 0 && ballCount === 0) {
+      if (strikeCount === 0 && ballCount === 0 && countExcess === 0) {
         console.log('Out!');
         console.log();
         break;
-      } else if (strikeCount !== 0 && ballCount === 0) {
+      } else if (strikeCount !== 0 && ballCount === 0 && countExcess === 0) {
         console.log(`${strikeCount} Strik!`);
         console.log();
         break;
-      } else if (strikeCount === 0 && ballCount !== 0) {
+      } else if (strikeCount === 0 && ballCount !== 0 && countExcess === 0) {
         console.log(`${ballCount} Ball!`);
         break;
-      } else {
+      } else if (countExcess === 0) {
         console.log(`${strikeCount} Strik!`);
         console.log(`${ballCount} Ball!`);
         console.log();
