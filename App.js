@@ -13,7 +13,7 @@ function main() {
 function checking(arr) {
   // 숫자 중복이 있는지 없는지 확인, 1~9 중 숫자 고르기, 숫자는 3개만 고르기
   const newArr = arr.map((el) => Number(el));
-  const baseBallQuiz = randomNum();
+  const baseBallQuiz = [1, 3, 2];
   console.log(baseBallQuiz);
   console.log();
 
@@ -31,47 +31,55 @@ function checking(arr) {
         console.log();
         break;
       }
+
+      let ballCount = 0;
+      let strikeCount = 0;
+
+      for (let j = 0; j < newArr.length; j++) {
+        if (newArr[j] < 10 && newArr[j] >= 1) {
+          const howManyBall = baseBallQuiz.includes(newArr[j]);
+
+          // baseBallQuiz가 가지고 있는 배열 요소를 newArr[j]가 가지고 있고, baseBallQuiz의 j번쨰와 newArr[j]번째의 숫자가 같은지 확인
+
+          if (howManyBall && newArr[j] === baseBallQuiz[j]) {
+            strikeCount += 1;
+          } else if (howManyBall) {
+            ballCount += 1;
+          }
+
+          // if (howManyBall) {
+          //   ballCount += 1;
+          //   console.log(`${ballCount} ball`);
+          // }
+        } else {
+          console.log('1 ~ 9 중에서 숫자를 골라주세요.');
+          break;
+        }
+      } // ball checking
+
+      if (strikeCount === 0 && ballCount === 0) {
+        console.log('Out!');
+        console.log();
+        break;
+      } else if (strikeCount !== 0 && ballCount === 0) {
+        console.log(`${strikeCount} Strik!`);
+        console.log();
+        break;
+      } else if (strikeCount === 0 && ballCount !== 0) {
+        console.log(`${ballCount} Ball!`);
+        break;
+      } else {
+        console.log(`${strikeCount} Strik!`);
+        console.log(`${ballCount} Ball!`);
+        console.log();
+        break;
+      }
     } else {
       // 1 ~ 9 사이 숫자가 아닐때
       console.log('1 ~ 9 중에서 숫자를 골라주세요.');
       console.log();
       break;
     }
-  }
-
-  let ballCount = 0;
-  let strikeCount = 0;
-
-  for (let j = 0; j < newArr.length; j++) {
-    if (newArr[j] < 10 && newArr[j] >= 1) {
-      const howManyBall = baseBallQuiz.includes(newArr[j]);
-
-      // baseBallQuiz가 가지고 있는 배열 요소를 newArr[j]가 가지고 있고, baseBallQuiz의 j번쨰와 newArr[j]번째의 숫자가 같은지 확인
-
-      if (howManyBall && newArr[j] === baseBallQuiz[j]) {
-        strikeCount += 1;
-      } else if (howManyBall) {
-        ballCount += 1;
-      }
-
-      // if (howManyBall) {
-      //   ballCount += 1;
-      //   console.log(`${ballCount} ball`);
-      // }
-    } else {
-      break;
-    }
-  } // ball checking
-
-  if (strikeCount === 0 && ballCount === 0) {
-    console.log('Out!');
-  } else if (strikeCount !== 0 && ballCount === 0) {
-    console.log(`${strikeCount} Strik!`);
-  } else if (strikeCount === 0 && ballCount !== 0) {
-    console.log(`${ballCount} Ball!`);
-  } else {
-    console.log(`${strikeCount} Strik!`);
-    console.log(`${ballCount} Ball!`);
   }
 }
 
