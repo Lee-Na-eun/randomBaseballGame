@@ -4,27 +4,33 @@ function main() {
   while (true) {
     console.log('중복없이 1~9 중 숫자 세 가지를 고르세요.');
     const input = readLine.question();
-    console.log('input', input);
-    const spl = input.split(' ');
-    checking(spl);
+    // console.log('input', input);
+    const numInput = input.split(' ').map((el) => Number(el));
+    const random = `${randomNum()}`;
+
+    if (String(numInput) !== random) {
+      checking(numInput, randomNum());
+    } else {
+      console.log('끌게요!');
+      break;
+    }
   }
 }
 
-function checking(arr) {
+function checking(arr, randomArr) {
   // 숫자 중복이 있는지 없는지 확인, 1~9 중 숫자 고르기, 숫자는 3개만 고르기
-  const newArr = arr.map((el) => Number(el));
-  const baseBallQuiz = randomNum();
-  console.log(baseBallQuiz);
+  const baseBallQuiz = randomArr;
+  console.log('baseBall', baseBallQuiz);
   console.log();
 
   // newArr이랑 baseBallQuiz랑 비교해줘야함
 
-  for (let i = 0; i < newArr.length; i++) {
-    if (newArr[i] < 10 && newArr[i] >= 1) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < 10 && arr[i] >= 1) {
       // 1 ~ 9까지
-      const isDupli = new Set(newArr).size;
+      const isDupli = new Set(arr).size;
 
-      if (newArr.length !== isDupli || newArr.length !== 3) {
+      if (arr.length !== isDupli || arr.length !== 3) {
         console.log(
           '숫자 중 중복이 있거나 숫자 세 가지를 선택하지 않으셨습니다.'
         );
@@ -36,19 +42,19 @@ function checking(arr) {
       let strikeCount = 0;
       let countExcess = 0;
 
-      for (let el of newArr) {
+      for (let el of arr) {
         if (el > 9 || el < 1) {
           countExcess += 1;
         }
       }
 
-      for (let j = 0; j < newArr.length; j++) {
-        if (newArr[j] < 10 && newArr[j] >= 1) {
-          const howManyBall = baseBallQuiz.includes(newArr[j]);
+      for (let j = 0; j < arr.length; j++) {
+        if (arr[j] < 10 && arr[j] >= 1) {
+          const howManyBall = baseBallQuiz.includes(arr[j]);
 
-          // baseBallQuiz가 가지고 있는 배열 요소를 newArr[j]가 가지고 있고, baseBallQuiz의 j번쨰와 newArr[j]번째의 숫자가 같은지 확인
+          // baseBallQuiz가 가지고 있는 배열 요소를 arr[j]가 가지고 있고, baseBallQuiz의 j번쨰와 arr[j]번째의 숫자가 같은지 확인
 
-          if (howManyBall && newArr[j] === baseBallQuiz[j]) {
+          if (howManyBall && arr[j] === baseBallQuiz[j]) {
             strikeCount += 1;
           } else if (howManyBall) {
             ballCount += 1;
@@ -94,7 +100,6 @@ function randomNum() {
       randomArr.push(oneNine);
     }
   }
-
   return randomArr;
 }
 
