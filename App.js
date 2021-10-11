@@ -1,6 +1,7 @@
 import * as readLine from 'readline-sync';
 
 function main() {
+  let answerCount = 0;
   while (true) {
     console.log('중복없이 1~9 중 숫자 세 가지를 고르세요.');
     const input = readLine.question();
@@ -10,7 +11,11 @@ function main() {
 
     if (String(numInput) !== random) {
       checking(numInput, randomNum());
+      answerCount += 1;
+      console.log(`지금까지 ${answerCount}번 하셨습니다.`);
     } else {
+      answerCount += 1;
+      console.log(`${answerCount}번만에 맞추셨습니다.`);
       console.log('끌게요!');
       break;
     }
@@ -100,7 +105,9 @@ function randomNum() {
       randomArr.push(oneNine);
     }
   }
-  return randomArr;
+  // return randomArr;
+  // input에 입력하면 랜덤값이 계속 바뀐다. 이 문제는 어떻게...?
+  return [1, 2, 3];
 }
 
 // 숫자 중복 X -> (o)
