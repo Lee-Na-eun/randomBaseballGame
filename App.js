@@ -15,10 +15,12 @@ function main() {
       answerCount += 1;
       console.log(`지금까지 ${answerCount}번 하셨습니다.`);
       console.log();
+      console.log();
     } else {
       answerCount += 1;
-      console.log(`${answerCount}번만에 맞추셨습니다.`);
+      console.log(`🤩 ${answerCount}번만에 맞추셨습니다.🤩`);
       console.log('끌게요!');
+      console.log();
       console.log();
       break;
     }
@@ -28,10 +30,8 @@ function main() {
 function checking(arr, randomArr) {
   // 숫자 중복이 있는지 없는지 확인, 1~9 중 숫자 고르기, 숫자는 3개만 고르기
   const baseBallQuiz = randomArr;
-  console.log();
 
   // randomArr이랑 baseBallQuiz랑 비교해줘야함
-
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] < 10 && arr[i] >= 1) {
       // 1 ~ 9까지
@@ -39,7 +39,7 @@ function checking(arr, randomArr) {
 
       if (arr.length !== isDupli || arr.length !== 3) {
         console.log(
-          '숫자 중 중복이 있거나 숫자 세 가지를 선택하지 않으셨습니다.'
+          '🧐 숫자 중 중복이 있거나 숫자 세 가지를 선택하지 않으셨습니다. 🧐'
         );
         console.log();
         break;
@@ -74,21 +74,20 @@ function checking(arr, randomArr) {
         console.log();
         break;
       } else if (strikeCount !== 0 && ballCount === 0 && countExcess === 0) {
-        console.log(`${strikeCount} Strik!`);
+        console.log(`⚾ ${strikeCount} Strik! ⚾`);
         console.log();
         break;
       } else if (strikeCount === 0 && ballCount !== 0 && countExcess === 0) {
-        console.log(`${ballCount} Ball!`);
+        console.log(`⚾ ${ballCount} Ball! ⚾`);
         break;
       } else if (countExcess === 0) {
-        console.log(`${strikeCount} Strik!`);
-        console.log(`${ballCount} Ball!`);
+        console.log(`⚾ ${strikeCount} Strik, ${ballCount} Ball! ⚾`);
         console.log();
         break;
       }
     } else {
       // 1 ~ 9 사이 숫자가 아닐때
-      console.log('1 ~ 9 중에서 숫자를 골라주세요.');
+      console.log(`🧐 1 ~ 9 숫자에서만 골라주세요. 🧐`);
       console.log();
       break;
     }
